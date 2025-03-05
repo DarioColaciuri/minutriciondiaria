@@ -186,7 +186,7 @@ const Dashboard = () => {
           <option value="Almuerzo">Almuerzo</option>
           <option value="Merienda">Merienda</option>
           <option value="Cena">Cena</option>
-          <option value="Colación">Colación</option>
+          <option value="Colación">Colacion</option>
         </select>
         <input
           type="number"
