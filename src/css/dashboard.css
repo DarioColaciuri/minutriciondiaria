@@ -1,43 +1,114 @@
 /* dashboard.css */
-.dashboard {
+.dashboard-container {
+  display: flex;
+  min-width: 99vw;
+  min-height: 100vh;
+}
+
+/* Aside */
+.aside {
+  width: 10%; /* Ancho del aside */
+  background-color: #444444;
   padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  position: fixed; /* Fija el aside a la izquierda */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 100; /* Asegura que esté por encima del contenido */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
 }
 
-.dashboard form {
-  margin-bottom: 20px;
+.aside h1 {
+  margin: 0 0 20px;
+  font-size: 24px;
+  text-align: center; /* Centra el texto */
 }
 
-.dashboard input {
-  display: block;
-  width: 100%;
+.aside p {
+  margin: 0 0 20px;
+  font-size: 16px;
+  text-align: center; /* Centra el texto */
+}
+
+.aside button {
+  width: 80%; /* Ancho del botón */
   padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #dc3545;
+  color: white;
+  cursor: pointer;
+}
+
+.aside button:hover {
+  background-color: #c82333;
+}
+
+/* Contenido principal */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra el contenido horizontalmente */
+  justify-content: flex-start; /* Alinea el contenido en la parte superior */
+  margin: 0 auto; /* Centra el contenido en la pantalla */
+  overflow-y: auto; /* Permite el scroll vertical */
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+}
+
+/* Estilos para el formulario */
+.dashboard-form {
+  margin-bottom: 20px;
+  width: 50%; /* Ocupa todo el ancho disponible */
+  max-width: 30%; /* Limita el ancho del formulario */
+  background-color: #444444;
+  padding: 2rem;
+  border-radius: 3rem;
+  border: 1px solid #ccc;
+}
+
+.dashboard-form input {
   margin-bottom: 10px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  width: 80%; /* Ocupa todo el ancho disponible */
 }
 
-.dashboard button {
-  padding: 10px 20px;
+.selector {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 86%; /* Ocupa todo el ancho disponible */
+}
+
+.add-meal-button {
+  padding: 10px;
   border: none;
   border-radius: 5px;
   background-color: #007bff;
   color: white;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
-.dashboard button:hover {
+.add-meal-button:hover {
   background-color: #0056b3;
 }
 
-.dashboard button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
+/* Estilos para la lista de comidas */
 .meals-list {
   margin-top: 20px;
+  width: 100%; /* Ocupa todo el ancho disponible */
+  max-width: 800px; /* Limita el ancho de la lista de comidas */
 }
 
 .meal-item {
@@ -45,9 +116,13 @@
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-.meal-item h3 {
+.meal-item h4 {
   margin: 0 0 10px;
 }
 
@@ -56,7 +131,21 @@
 }
 
 .meal-item img {
-  display: block;
-  margin: 0 auto;
+  width: 50%;
   height: auto;
+  margin: 1rem;
+}
+
+.meal-item button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #dc3545;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.meal-item button:hover {
+  background-color: #c82333;
 }

@@ -39,7 +39,7 @@ const Home = () => {
   return (
     <div className="home">
       <h1>Iniciar Sesión</h1>
-      <form onSubmit={handleLogin}>
+      <form className="form" onSubmit={handleLogin}>
         <input
           type="email"
           placeholder="Correo electrónico"
@@ -56,10 +56,12 @@ const Home = () => {
         />
         <button type="submit">Iniciar Sesión</button>
       </form>
-      <button className="google" onClick={handleGoogleLogin}>
-        <i className="bi bi-google"></i>
-      </button>
-      <button onClick={() => navigate("/register")}>Registrarse</button>
+      <div className="xtra-btn">
+        <button className="google" onClick={handleGoogleLogin}>
+          <i className="bi bi-google"></i>
+        </button>
+        <button onClick={() => navigate("/register")}>Registrarse</button>
+      </div>
     </div>
   );
 };
