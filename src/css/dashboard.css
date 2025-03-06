@@ -178,6 +178,10 @@
   margin: 1rem 0; /* Espacio alrededor del separador */
 }
 
+.link {
+  color: #dcbf85;
+}
+
 /* Media queries para móviles y tabletas */
 @media (max-width: 768px) {
   .aside {

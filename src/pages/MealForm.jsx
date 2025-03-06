@@ -74,6 +74,14 @@ const MealForm = ({
           "Agregar Comida"
         )}
       </button>
+      <p>
+        Por favor usar{" "}
+        <a className="link" target="_blank" href="https://squoosh.app/">
+          Squoosh
+        </a>{" "}
+        para reducir el tamaño de la imagen. Compress Webp y que pese menos de
+        200kb.
+      </p>
     </form>
   );
 };
