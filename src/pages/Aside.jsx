@@ -23,7 +23,9 @@ const Aside = () => {
     <aside className="aside">
       <h1>Dashboard</h1>
       <p>Bienvenido, {user?.displayName || user?.email}</p>
-      <button onClick={handleLogout}>Cerrar Sesión</button>
+      <button onClick={handleLogout}>
+        <i title="Cerrar Sesión" className="bi bi-x-circle"></i>
+      </button>
     </aside>
   );
 };

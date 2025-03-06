@@ -1,27 +1,38 @@
+/* 
+#DDD78D Flax (amarillo)
+#DCBF85 Ecru (naranja)
+#8B635C Rose taupe (bordo)
+#60594D Walnut Brown (marron oscuro)
+#93A29B Ash grey (gris)
+ */
+
 :root {
   color: rgba(255, 255, 255, 0.87);
   font-family: "Comfortaa", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
-  background-color: #242424;
+  background-color: #60594d;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: hidden; /* Evita el desbordamiento horizontal */
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Elimina el scroll en el body y html */
 }
 
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-body {
+  width: 100%;
+  height: 100%;
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  padding: 0;
+  text-align: center;
+  overflow: hidden; /* Evita el scroll en el contenedor raíz */
 }

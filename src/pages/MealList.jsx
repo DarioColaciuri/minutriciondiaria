@@ -11,6 +11,9 @@ const MealList = ({ meals, handleDeleteMeal, isLoading }) => {
     return `${values[0]} ${values[1]} ${values[2]} ${values[3]}`;
   };
 
+  // Obtener las fechas (días) de las comidas
+  const dates = Object.keys(meals);
+
   return (
     <div className="meals-list">
       <h2>Mis Comidas</h2>
@@ -18,10 +21,10 @@ const MealList = ({ meals, handleDeleteMeal, isLoading }) => {
         <div style={{ textAlign: "center" }}>
           <ClipLoader size={30} color="#007bff" />
         </div>
-      ) : Object.keys(meals).length === 0 ? (
+      ) : dates.length === 0 ? (
         <p>No hay comidas registradas.</p>
       ) : (
-        Object.keys(meals).map((date) => (
+        dates.map((date, index) => (
           <div key={date}>
             <h3>{date}</h3> {/* Mostrar la fecha */}
             {meals[date].map((meal) => (
@@ -35,8 +38,8 @@ const MealList = ({ meals, handleDeleteMeal, isLoading }) => {
                     borderRadius: getRandomBorderRadius(), // Aplica el border-radius aleatorio
                   }}
                 />
-                <p>{meal.description}</p>
-                <p>Proteínas: {meal.protein}g</p>
+                <p className="description">{meal.description}</p>
+                <p className="proteins">Proteínas: {meal.protein}g</p>
                 <p>
                   <small>{meal.timestamp?.toDate().toLocaleTimeString()}</small>
                 </p>
@@ -47,11 +50,13 @@ const MealList = ({ meals, handleDeleteMeal, isLoading }) => {
                   {isLoading ? (
                     <ClipLoader size={20} color="#ffffff" />
                   ) : (
-                    "Eliminar"
+                    <i title="Eliminar" className="bi bi-trash3"></i>
                   )}
                 </button>
               </div>
             ))}
+            {/* Agregar un separador <hr /> después de cada día, excepto el último */}
+            {index < dates.length - 1 && <hr className="day-separator" />}
           </div>
         ))
       )}

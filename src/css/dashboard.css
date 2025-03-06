@@ -1,41 +1,49 @@
 /* dashboard.css */
 .dashboard-container {
   display: flex;
-  min-width: 99vw;
+  width: 100%; /* Ocupa todo el ancho disponible */
   min-height: 100vh;
+  overflow-x: hidden; /* Evita el desbordamiento horizontal */
 }
 
 /* Aside */
 .aside {
-  width: 10%; /* Ancho del aside */
-  background-color: #444444;
-  padding: 20px;
+  width: 10%;
+  background-color: #8b635c;
+  padding: 10px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  position: fixed; /* Fija el aside a la izquierda */
+  position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
-  z-index: 100; /* Asegura que esté por encima del contenido */
+  z-index: 100;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centra verticalmente */
-  align-items: center; /* Centra horizontalmente */
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
 }
 
 .aside h1 {
-  margin: 0 0 20px;
-  font-size: 24px;
-  text-align: center; /* Centra el texto */
+  margin: 0 0 10px;
+  font-size: 18px;
+  text-align: center;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .aside p {
-  margin: 0 0 20px;
-  font-size: 16px;
-  text-align: center; /* Centra el texto */
+  margin: 0 0 10px;
+  font-size: 14px;
+  text-align: center;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .aside button {
-  width: 80%; /* Ancho del botón */
+  width: 80%;
   padding: 10px;
   border: none;
   border-radius: 5px;
@@ -55,19 +63,19 @@
   width: 80%;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centra el contenido horizontalmente */
-  justify-content: flex-start; /* Alinea el contenido en la parte superior */
-  margin: 0 auto; /* Centra el contenido en la pantalla */
-  overflow-y: auto; /* Permite el scroll vertical */
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0 auto;
+  overflow-y: auto; /* Scroll vertical solo aquí */
   height: 100vh; /* Ocupa toda la altura de la pantalla */
 }
 
 /* Estilos para el formulario */
 .dashboard-form {
   margin-bottom: 20px;
-  width: 50%; /* Ocupa todo el ancho disponible */
-  max-width: 30%; /* Limita el ancho del formulario */
-  background-color: #444444;
+  width: 50%;
+  max-width: 30%;
+  background-color: #8b635c;
   padding: 2rem;
   border-radius: 3rem;
   border: 1px solid #ccc;
@@ -78,7 +86,7 @@
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  width: 80%; /* Ocupa todo el ancho disponible */
+  width: 80%;
 }
 
 .selector {
@@ -86,40 +94,49 @@
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  width: 86%; /* Ocupa todo el ancho disponible */
+  width: 86%;
 }
 
 .add-meal-button {
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #007bff;
-  color: white;
+  background-color: #ddd78d;
+  color: rgb(37, 37, 37);
   cursor: pointer;
-  transition: background-color 0.3s ease;
   transition: background-color 0.3s ease;
 }
 
 .add-meal-button:hover {
-  background-color: #0056b3;
+  background-color: #dcbf85;
 }
 
 /* Estilos para la lista de comidas */
 .meals-list {
-  margin-top: 20px;
-  width: 100%; /* Ocupa todo el ancho disponible */
-  max-width: 800px; /* Limita el ancho de la lista de comidas */
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 50%;
 }
 
 .meal-item {
   border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 10px;
+  padding: 1rem;
+  border-radius: 2rem;
+  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  background-color: #8b635c8e;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.meal-item:hover {
+  background-color: #8b635c;
 }
 
 .meal-item h4 {
@@ -128,6 +145,10 @@
 
 .meal-item p {
   margin: 0 0 10px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-width: 60%;
 }
 
 .meal-item img {
@@ -148,4 +169,45 @@
 
 .meal-item button:hover {
   background-color: #c82333;
+}
+
+.day-separator {
+  border: 0;
+  height: 0.2rem;
+  background-color: #dcbf85; /* Color del separador */
+  margin: 1rem 0; /* Espacio alrededor del separador */
+}
+
+/* Media queries para móviles y tabletas */
+@media (max-width: 768px) {
+  .aside {
+    display: none; /* Oculta el aside en móviles y tabletas */
+  }
+
+  .dashboard-form {
+    display: none; /* Oculta el formulario en móviles y tabletas */
+  }
+
+  .main-content {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 0 5%; /* Margen del 5% a cada lado */
+    margin: 0; /* Elimina el margen automático */
+  }
+
+  .meals-list {
+    max-width: 100%; /* Las comidas ocupan todo el ancho */
+  }
+
+  .meal-item {
+    max-width: 100%; /* Ajusta el ancho de las comidas */
+    margin: 0 auto 1rem; /* Centra las comidas */
+  }
+
+  .meal-item img {
+    width: 80%; /* Ajusta el tamaño de la imagen */
+  }
+
+  .meal-item p {
+    max-width: 100%; /* Ajusta el ancho del texto */
+  }
 }
