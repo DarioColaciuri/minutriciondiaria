@@ -12,6 +12,8 @@ const MealForm = ({
   setType,
   protein,
   setProtein,
+  schedule, // Nuevo campo: Horario
+  setSchedule, // Nuevo campo: Horario
   isLoading,
   isUploading,
   handleImageUpload,
@@ -27,14 +29,22 @@ const MealForm = ({
         onChange={(e) => setTitle(e.target.value)}
         required
       />
-      <input
+      {/* Cambiar el input de descripción por un textarea */}
+      <textarea
         className="description-input"
-        type="text"
         placeholder="Descripción de la comida"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         required
       />
+      {/* Nuevo campo: Horario */}
+      {/* <input
+        className="schedule-input"
+        type="text"
+        placeholder="Horario (opcional)"
+        value={schedule}
+        onChange={(e) => setSchedule(e.target.value)}
+      /> */}
       <input
         className="file-input"
         type="file"

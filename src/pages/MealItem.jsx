@@ -8,6 +8,8 @@ const MealItem = ({ meal, handleDeleteMeal, isLoading }) => {
       <p>{meal.type}</p>
       <img src={meal.imageUrl} alt={meal.title} />
       <p className="description">{meal.description}</p>
+      {/* Mostrar el horario solo si está presente */}
+      {meal.schedule && <p className="schedule">Horario: {meal.schedule}</p>}
       <p>Proteínas: {meal.protein}g</p>
       <p>
         <small>{meal.timestamp?.toDate().toLocaleTimeString()}</small>
@@ -16,7 +18,7 @@ const MealItem = ({ meal, handleDeleteMeal, isLoading }) => {
         {isLoading ? (
           <ClipLoader size={20} color="#ffffff" />
         ) : (
-          <i class="bi bi-trash3"></i>
+          <i className="bi bi-trash3"></i>
         )}
       </button>
     </div>

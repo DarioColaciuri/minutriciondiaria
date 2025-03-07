@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { auth } from "../firebase/config";
 import { useNavigate } from "react-router-dom";
-import { showToast } from "../utils/toast"; // Importar showToast
+import { showToast } from "../utils/toast";
 import {
   collection,
   addDoc,
@@ -24,12 +24,14 @@ const Dashboard = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [type, setType] = useState("Desayuno");
   const [protein, setProtein] = useState("");
-  const [meals, setMeals] = useState({}); // meals es un objeto
+  const [schedule, setSchedule] = useState(""); // Nuevo campo: Horario
+  const [meals, setMeals] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
+  const [sortDaysOrder, setSortDaysOrder] = useState("desc");
+  const [sortMealsOrder, setSortMealsOrder] = useState("asc");
   const navigate = useNavigate();
 
-  // Obtener el ID del usuario actual
   const userId = auth.currentUser?.uid;
 
   // Función para subir la imagen a Cloudinary
@@ -49,10 +51,10 @@ const Dashboard = () => {
       );
       const data = await response.json();
       setImageUrl(data.secure_url);
-      showToast("Imagen subida correctamente", "success"); // Usar showToast
+      showToast("Imagen subida correctamente", "success");
     } catch (error) {
       console.error("Error al subir la imagen:", error);
-      showToast("Error al subir la imagen", "error"); // Usar showToast
+      showToast("Error al subir la imagen", "error");
     } finally {
       setIsUploading(false);
     }
@@ -62,7 +64,7 @@ const Dashboard = () => {
   const handleAddMeal = async (e) => {
     e.preventDefault();
     if (!title || !description || !imageUrl || !type || !protein) {
-      showToast("Todos los campos son obligatorios", "error"); // Usar showToast
+      showToast("Todos los campos son obligatorios", "error");
       return;
     }
 
@@ -75,17 +77,19 @@ const Dashboard = () => {
         imageUrl,
         type,
         protein: parseFloat(protein),
+        schedule, // Nuevo campo: Horario
         timestamp: serverTimestamp(),
       });
-      showToast("Comida agregada correctamente", "success"); // Usar showToast
+      showToast("Comida agregada correctamente", "success");
       setTitle("");
       setDescription("");
       setImageUrl("");
       setType("Desayuno");
       setProtein("");
+      setSchedule(""); // Limpiar el campo de horario
     } catch (error) {
       console.error("Error al agregar la comida:", error.message);
-      showToast("Error al agregar la comida: " + error.message, "error"); // Usar showToast
+      showToast("Error al agregar la comida: " + error.message, "error");
     } finally {
       setIsLoading(false);
     }
@@ -96,10 +100,10 @@ const Dashboard = () => {
     setIsLoading(true);
     try {
       await deleteDoc(doc(db, "meals", mealId));
-      showToast("Comida eliminada correctamente", "success"); // Usar showToast
+      showToast("Comida eliminada correctamente", "success");
     } catch (error) {
       console.error("Error al eliminar la comida:", error.message);
-      showToast("Error al eliminar la comida: " + error.message, "error"); // Usar showToast
+      showToast("Error al eliminar la comida: " + error.message, "error");
     } finally {
       setIsLoading(false);
     }
@@ -117,13 +121,28 @@ const Dashboard = () => {
       groupedMeals[date].push(meal);
     });
 
+    // Ordenar las comidas dentro de cada día
     Object.keys(groupedMeals).forEach((date) => {
-      groupedMeals[date].sort(
-        (a, b) => a.timestamp?.toDate() - b.timestamp?.toDate()
-      );
+      groupedMeals[date].sort((a, b) => {
+        const timeA = a.timestamp?.toDate().getTime();
+        const timeB = b.timestamp?.toDate().getTime();
+        return sortMealsOrder === "asc" ? timeA - timeB : timeB - timeA;
+      });
     });
 
-    return groupedMeals;
+    // Ordenar los días
+    const sortedDates = Object.keys(groupedMeals).sort((a, b) => {
+      const dateA = new Date(a);
+      const dateB = new Date(b);
+      return sortDaysOrder === "desc" ? dateB - dateA : dateA - dateB;
+    });
+
+    const sortedGroupedMeals = {};
+    sortedDates.forEach((date) => {
+      sortedGroupedMeals[date] = groupedMeals[date];
+    });
+
+    return sortedGroupedMeals;
   };
 
   // Obtener las comidas del usuario actual
@@ -141,7 +160,7 @@ const Dashboard = () => {
     });
 
     return () => unsubscribe();
-  }, [userId]);
+  }, [userId, sortDaysOrder, sortMealsOrder]);
 
   return (
     <div className="dashboard-container">
@@ -162,6 +181,8 @@ const Dashboard = () => {
           setType={setType}
           protein={protein}
           setProtein={setProtein}
+          schedule={schedule} // Nuevo campo: Horario
+          setSchedule={setSchedule} // Nuevo campo: Horario
           isLoading={isLoading}
           isUploading={isUploading}
           handleImageUpload={handleImageUpload}
@@ -173,6 +194,10 @@ const Dashboard = () => {
           meals={meals}
           handleDeleteMeal={handleDeleteMeal}
           isLoading={isLoading}
+          sortDaysOrder={sortDaysOrder}
+          setSortDaysOrder={setSortDaysOrder}
+          sortMealsOrder={sortMealsOrder}
+          setSortMealsOrder={setSortMealsOrder}
         />
       </main>
     </div>
